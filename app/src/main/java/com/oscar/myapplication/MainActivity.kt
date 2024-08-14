@@ -7,11 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,10 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyApplicationTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    Columns(modifier = Modifier.padding(innerPadding));
                 }
             }
         }
@@ -72,18 +72,71 @@ fun Boxes(){
 
 }
 
+//EJEMPLO DE COLUMNAS
 @Composable
-fun Columns(){
-    Text(text = "Texto 1")
-    Text(text = "Texto 2")
-    Text(text = "Texto 3")
-    Text(text = "Texto 4")
+fun Columns(modifier: Modifier){
+ Column (modifier = Modifier
+     .fillMaxSize()
+     .verticalScroll(rememberScrollState())){
+     Text(text = "Texto 1", modifier = Modifier
+         .background(Color.Black)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 2", modifier = Modifier
+         .background(Color.Gray)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 3", modifier = Modifier
+         .background(Color.Red)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 4", modifier = Modifier
+         .background(Color.Blue)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 4", modifier = Modifier
+         .background(Color.Cyan)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 4", modifier = Modifier
+         .background(Color.Green)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 4", modifier = Modifier
+         .background(Color.Magenta)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 4", modifier = Modifier
+         .background(Color.LightGray)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 4", modifier = Modifier
+         .background(Color.LightGray)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 4", modifier = Modifier
+         .background(Color.LightGray)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 4", modifier = Modifier
+         .background(Color.LightGray)
+         .height(100.dp)
+         .fillMaxWidth())
+     Text(text = "Texto 4", modifier = Modifier
+         .background(Color.LightGray)
+         .height(100.dp)
+         .fillMaxWidth())
+
+ }
+
 }
+
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     MyApplicationTheme {
-        Columns();
+        Columns(Modifier);
     }
 }
