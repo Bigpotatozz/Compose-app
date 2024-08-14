@@ -6,8 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,7 +36,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyApplicationTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    Columns(modifier = Modifier.padding(innerPadding));
+                    Filas(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -77,7 +81,8 @@ fun Boxes(){
 fun Columns(modifier: Modifier){
  Column (modifier = Modifier
      .fillMaxSize()
-     .verticalScroll(rememberScrollState())){
+     .verticalScroll(rememberScrollState()),
+     verticalArrangement = Arrangement.SpaceBetween){
      Text(text = "Texto 1", modifier = Modifier
          .background(Color.Black)
          .height(100.dp)
@@ -94,49 +99,82 @@ fun Columns(modifier: Modifier){
          .background(Color.Blue)
          .height(100.dp)
          .fillMaxWidth())
-     Text(text = "Texto 4", modifier = Modifier
-         .background(Color.Cyan)
-         .height(100.dp)
-         .fillMaxWidth())
-     Text(text = "Texto 4", modifier = Modifier
-         .background(Color.Green)
-         .height(100.dp)
-         .fillMaxWidth())
-     Text(text = "Texto 4", modifier = Modifier
-         .background(Color.Magenta)
-         .height(100.dp)
-         .fillMaxWidth())
-     Text(text = "Texto 4", modifier = Modifier
-         .background(Color.LightGray)
-         .height(100.dp)
-         .fillMaxWidth())
-     Text(text = "Texto 4", modifier = Modifier
-         .background(Color.LightGray)
-         .height(100.dp)
-         .fillMaxWidth())
-     Text(text = "Texto 4", modifier = Modifier
-         .background(Color.LightGray)
-         .height(100.dp)
-         .fillMaxWidth())
-     Text(text = "Texto 4", modifier = Modifier
-         .background(Color.LightGray)
-         .height(100.dp)
-         .fillMaxWidth())
-     Text(text = "Texto 4", modifier = Modifier
-         .background(Color.LightGray)
-         .height(100.dp)
-         .fillMaxWidth())
 
  }
 
 }
 
+//EJEMPLO DE FILAS
+@Composable
+fun Filas(modifier: Modifier){
 
+    Row (modifier = Modifier.horizontalScroll(rememberScrollState())){
+        Text(text = "Texto 1")
+        Text(text = "Texto 2")
+        Text(text = "Texto 3")
+        Text(text = "Texto 4")
+        Text(text = "Texto 5")
+        Text(text = "Texto 6")
+        Text(text = "Texto 7")
+        Text(text = "Texto 9")
+        Text(text = "Texto 10")
+        Text(text = "Texto 11")
+    }
+
+
+}
+
+//EJEMPLO QUE CONTIENE TODOS LOS TIPOS DE LAYOUTS
+@Composable
+fun ComplexLayout(){
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.Gray)) {
+
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Blue)
+            .weight(1f), contentAlignment = Alignment.Center){
+
+            Text(text = "Ejemplo 1")
+        }
+
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Green)
+            .weight(1f)){
+
+            Row(modifier = Modifier.fillMaxWidth()){
+                Box(modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f)
+                    .background(Color.Black), contentAlignment = Alignment.Center){
+                    Text(text = "Ejemplo 2", color = Color.White)
+                }
+                Box(modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f)
+                    .background(Color.Green), contentAlignment = Alignment.Center){
+                    Text(text = "Ejemplo 3")
+                }
+            }
+
+        }
+
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.LightGray)
+            .weight(1f), contentAlignment = Alignment.BottomCenter){
+
+            Text(text = "Ejemplo 4");
+        }
+    }
+}
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     MyApplicationTheme {
-        Columns(Modifier);
+        ComplexLayout()
     }
 }
