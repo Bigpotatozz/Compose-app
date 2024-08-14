@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -24,9 +25,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.oscar.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -171,10 +175,48 @@ fun ComplexLayout(){
     }
 }
 
+//EJEMPLO CON CONSTRAINT LAYOUT
+@Composable
+fun FunConstraint(){
+
+    ConstraintLayout (modifier = Modifier.fillMaxSize()){
+
+        val (box_red, box_blue, box_yellow, box_magenta, box_black) = createRefs();
+
+        Box(modifier = Modifier.size(125.dp).background(Color.Red).constrainAs(box_red){
+            top.linkTo(parent.top);
+            bottom.linkTo(parent.bottom);
+            start.linkTo(parent.start);
+            end.linkTo(parent.end);
+        }){}
+
+        Box(modifier = Modifier.size(125.dp).background(Color.Blue).constrainAs(box_blue){
+            top.linkTo(box_red.bottom)
+            start.linkTo(box_red.end)
+        }){}
+
+        Box(modifier = Modifier.size(125.dp).background(Color.Black).constrainAs(box_black){
+            top.linkTo(box_red.bottom)
+            end.linkTo(box_red.start)
+        }){}
+
+        Box(modifier = Modifier.size(125.dp).background(Color.Yellow).constrainAs(box_yellow){
+            bottom.linkTo(box_red.top)
+            end.linkTo(box_red.start)
+        }){}
+
+        Box(modifier = Modifier.size(125.dp).background(Color.Magenta).constrainAs(box_magenta){
+            bottom.linkTo(box_red.top);
+            start.linkTo(box_red.end)
+        }){}
+    }
+
+}
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     MyApplicationTheme {
-        ComplexLayout()
+        FunConstraint()
     }
 }
